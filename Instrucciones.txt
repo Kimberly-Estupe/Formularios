@@ -1,0 +1,36 @@
+Dependencias
+* Spring web
+* Spring boot dev tools
+* Thymeleaf
+
+
+1. crear las carpetas
+En la carpeta "./src/main/java/(nombre modelo)" crear las carpetas Controllers y Models
+
+2. En models crear el modelo:
+  Con sus variables, constructor, setters y getters
+
+3. En la carpeta Templates crar las visas html
+En las vistas html agregar thymeleaf
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+En el area de form agregar:
+th:action="@{/bebidas/nuevaBebida}" th:objetc="${bebida}" method="post" 
+
+action hace referencia al controlador: /RequestMapping/PostMapping que va a devolver
+y el objet hace referencia a lo que esta recibiendo
+
+4.Controller 
+//recibe
+@GetMapping("/registrar")
+    public String getAllBebidas(Model model){
+        model.addAttribute("bebida", new BebidasModel());
+        return "BebidasForm";//Retorna la pagina html
+    }
+
+//devuelve
+    @PostMapping("/nuevaBebida")
+    public String nuevaBebida(@ModelAttribute BebidasModel bebidas, Model model){
+        model.addAttribute("bebidas", bebidas);
+        return "ResultBebidas";
+    }
